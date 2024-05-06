@@ -62,7 +62,8 @@
       var busStops = data.busStop;
       var dataTime = data.routeStatusTime;
       var html = '';
-      html += '<h1>Bus Schedule for K58 as of: ' + dataTime + '</h1>';
+      html += '<h1>' + dataTime + '</h1>';
+      html += '<h1>Bus Schedule for K58:</h1>';
       for (var i = 0; i < busStops.length; i++) {
         var busStop = busStops[i];
         var buses = busStop.bus;
