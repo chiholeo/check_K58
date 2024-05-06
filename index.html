@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bus Schedule</title>
+  <style>
+    .bus-item {
+      margin-bottom: 20px;
+    }
+
+    .bus-item strong {
+      display: block;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bus Schedule of K58:</h1>
+  <div id="result"></div>
+
+  <script>
+    var url = 'https://rt.data.gov.hk/v1/transport/mtr/bus/getSchedule';
+    var params = {
+      language: 'zh',
+      routeName: 'K58'
+    };
+
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(params),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Network response was not ok.');
+    })
+    .then(function(data) {
+      var busStopMap = {
+        'K58-U070': '青松觀', // Hard-coded mapping
+        'K58-U060':'屯門醫院'
+        // Add more mappings as needed
+      };
+      var resultElement = document.getElementById('result');
+      resultElement.innerHTML = '';
+
+      var busStops = data.busStop;
+      var html = '';
+
+      for (var i = 0; i < busStops.length; i++) {
+        var busStop = busStops[i];
+        var buses = busStop.bus;
+        var busStopName = busStopMap[busStop.busStopId];
+
+        if (!busStopName) {
+          continue; // Skip the bus stop group if the bus stop code doesn't have a mapping
+        }
+
+        html += '<h2>Bus Schedule for ' + busStopName + ':</h2>';
+
+        for (var j = 0; j < buses.length; j++) {
+          var bus = buses[j];
+          var htmlItem = '<div class="bus-item">';
+          htmlItem += '<strong>Bus ID:</strong> ' + bus.busId;
+          htmlItem += '<strong>Departure Time:</strong> ' + bus.departureTimeText;
+          htmlItem += '</div>';
+          html += htmlItem;
+        }
+      }
+
+      resultElement.innerHTML = html;
+    })
+    .catch(function(error) {
+      console.log('Error:', error);
+    });
+  </script>
+</body>
+</html>
