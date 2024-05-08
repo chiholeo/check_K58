@@ -39,6 +39,13 @@
     })
     .then(function(data) {
       var busStopMap = {
+        'K58-U010':'富泰',
+        'K58-U020':'聚康山莊',
+        'K58-U023':'嶺南大學',
+        'K58-U026':'彩暉花園',
+        'K58-U030':'港鐵兆康站 (南), (輕鐵兆康站)',
+        'K58-U040':'兆康苑',
+        'K58-U050':'輕鐵麒麟站',
         'K58-U070': '青松觀', // Hard-coded mapping
         'K58-U060':'屯門醫院',
         //'K58-U080':'保良局莊啟程第二小學',
@@ -57,6 +64,9 @@
         //'K58-U210':'青山灣',
         // Add more mappings as needed
       };
+      const single = ['910'];
+      const double = ['150','325'];
+
       var resultElement = document.getElementById('result');
       resultElement.innerHTML = '';
 
@@ -73,13 +83,20 @@
         if (!busStopName) {
           continue; // Skip the bus stop group if the bus stop code doesn't have a mapping
         }
-
-        html += '<h2>Bus Schedule for ' + busStopName + ':</h2>';
+        
+        html += '<h2 style="text-decoration: underline;">' + busStopName + ':</h2>';
 
         for (var j = 0; j < buses.length; j++) {
           var bus = buses[j];
           var htmlItem = '<div class="bus-item">';
-          htmlItem += '<strong>Bus ID:</strong> ' + bus.busId;
+          var busName = bus.busId;
+          if (single.includes(bus.busId)) {
+            busName = bus.busId + ' 單層巴士';
+          }
+          if (double.includes(bus.busId)) {
+            busName = bus.busId + ' 雙層巴士';
+          }
+          htmlItem += '<strong>Bus ID:</strong> ' + busName;
           htmlItem += '<strong>Departure Time:</strong> ' + bus.departureTimeText;
           htmlItem += '</div>';
           html += htmlItem;
