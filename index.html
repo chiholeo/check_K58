@@ -3,6 +3,7 @@
 <head>
   <meta http-equiv="refresh" content="30">
   <title>Bus Schedule</title>
+  <link rel="icon" href="logo.png" type="image/x-icon">
   <style>
     html, body {
       width: 100%;
@@ -36,12 +37,16 @@
   </style>
 </head>
 <body>
+  <header>
+    <img src="logo.png" alt="Logo" width="100">
+    <!-- Other header content -->
+  </header>
   <div id="result"></div>
   <script>
     var url = 'https://rt.data.gov.hk/v1/transport/mtr/bus/getSchedule';
     var params = {
       language: 'zh',
-      routeName: 'K58'
+      routeName: 'K51'
     };
 
     fetch(url, {
@@ -103,7 +108,7 @@
 
         if (!busStopName) {
           busStopName = busStop.busStopId
-          continue; // Skip the bus stop group if the bus stop code doesn't have a mapping
+          //continue; // Skip the bus stop group if the bus stop code doesn't have a mapping
         }
         
         html += '<h2 style="text-decoration: underline;font-size: 10vw;margin-bottom: 10px;">' + busStopName + ':</h2>';
