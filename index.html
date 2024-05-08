@@ -39,7 +39,6 @@
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Logo" width="100">
     <!-- Other header content -->
   </header>
   <div id="result"></div>
@@ -99,8 +98,14 @@
       var busStops = data.busStop;
       var dataTime = data.routeStatusTime;
       var html = '';
-      html += '<h1>' + dataTime + '</h1>';
-      html += '<h1>Bus Schedule for K58:</h1>';
+      html += '<div class="container">';
+      html += '  <img src="logo.png" alt="Image" width="100">';
+      html += '  <div>';
+      html += '    <h1>' + dataTime + '</h1>';
+      html += '    <h1>Bus Schedule for K58:</h1>';
+      html += '  </div>';
+      html += '</div>';
+      
       //for (var i = 0; i < busStops.length; i++) {
         for (var i = busStops.length - 1; i >= 0; i--){
         var busStop = busStops[i];
