@@ -4,11 +4,28 @@
   <meta http-equiv="refresh" content="30">
   <title>Bus Schedule</title>
   <style>
+    html, body {
+      width: 100%;
+      margin: 10;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .container {
+      display: flex;
+
+    }
+
+    .text {
+      font-size: 5vw; /* Adjust this value as desired */
+      text-align: center;
+    }
     .bus-item {
-      margin-bottom: 20px;
+      font-size: 5vw;
+      margin-bottom: 10px;
     }
 
     .bus-item strong {
+      font-size: 5vw;
       display: block;
       font-weight: bold;
     }
@@ -16,12 +33,11 @@
 </head>
 <body>
   <div id="result"></div>
-
   <script>
     var url = 'https://rt.data.gov.hk/v1/transport/mtr/bus/getSchedule';
     var params = {
       language: 'zh',
-      routeName: 'K58'
+      routeName: 'K51'
     };
 
     fetch(url, {
@@ -73,18 +89,20 @@
       var busStops = data.busStop;
       var dataTime = data.routeStatusTime;
       var html = '';
-      html += '<h1>' + dataTime + '</h1>';
-      html += '<h1>Bus Schedule for K58:</h1>';
-      for (var i = 0; i < busStops.length; i++) {
+      html += '<h1 style="font-size: 5vw;">' + dataTime + '</h1>';
+      html += '<h1 style="font-size: 5vw;">Bus Schedule for K58:</h1>';
+      //for (var i = 0; i < busStops.length; i++) {
+        for (var i = busStops.length - 1; i >= 0; i--){
         var busStop = busStops[i];
         var buses = busStop.bus;
         var busStopName = busStopMap[busStop.busStopId];
 
         if (!busStopName) {
-          continue; // Skip the bus stop group if the bus stop code doesn't have a mapping
+          busStopName = busStop.busStopId
+          //continue; // Skip the bus stop group if the bus stop code doesn't have a mapping
         }
         
-        html += '<h2 style="text-decoration: underline;">' + busStopName + ':</h2>';
+        html += '<h2 style="text-decoration: underline;font-size: 10vw;margin-bottom: 10px;">' + busStopName + ':</h2>';
 
         for (var j = 0; j < buses.length; j++) {
           var bus = buses[j];
@@ -96,8 +114,8 @@
           if (double.includes(bus.busId)) {
             busName = bus.busId + ' 雙層巴士';
           }
-          htmlItem += '<strong>Bus ID:</strong> ' + busName;
-          htmlItem += '<strong>Departure Time:</strong> ' + bus.departureTimeText;
+          htmlItem += '<strong>Bus ID: ' + busName+'</strong>';
+          htmlItem += '<strong>Departure Time: ' + bus.departureTimeText+'</strong>';
           htmlItem += '</div>';
           html += htmlItem;
         }
