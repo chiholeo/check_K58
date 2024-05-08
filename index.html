@@ -14,18 +14,22 @@
       display: flex;
 
     }
-
+    h1 {
+      font-size: 8vw;
+      margin: 0;
+      line-height: 1;
+    }
     .text {
       font-size: 5vw; /* Adjust this value as desired */
       text-align: center;
     }
     .bus-item {
-      font-size: 5vw;
+      font-size: 8vw;
       margin-bottom: 10px;
     }
 
     .bus-item strong {
-      font-size: 5vw;
+      font-size: 8vw;
       display: block;
       font-weight: bold;
     }
@@ -37,7 +41,7 @@
     var url = 'https://rt.data.gov.hk/v1/transport/mtr/bus/getSchedule';
     var params = {
       language: 'zh',
-      routeName: 'K51'
+      routeName: 'K58'
     };
 
     fetch(url, {
@@ -89,8 +93,8 @@
       var busStops = data.busStop;
       var dataTime = data.routeStatusTime;
       var html = '';
-      html += '<h1 style="font-size: 5vw;">' + dataTime + '</h1>';
-      html += '<h1 style="font-size: 5vw;">Bus Schedule for K58:</h1>';
+      html += '<h1>' + dataTime + '</h1>';
+      html += '<h1>Bus Schedule for K58:</h1>';
       //for (var i = 0; i < busStops.length; i++) {
         for (var i = busStops.length - 1; i >= 0; i--){
         var busStop = busStops[i];
@@ -99,7 +103,7 @@
 
         if (!busStopName) {
           busStopName = busStop.busStopId
-          //continue; // Skip the bus stop group if the bus stop code doesn't have a mapping
+          continue; // Skip the bus stop group if the bus stop code doesn't have a mapping
         }
         
         html += '<h2 style="text-decoration: underline;font-size: 10vw;margin-bottom: 10px;">' + busStopName + ':</h2>';
