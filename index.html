@@ -47,7 +47,7 @@
     var url = 'https://rt.data.gov.hk/v1/transport/mtr/bus/getSchedule';
     var params = {
       language: 'zh',
-      routeName: 'K51'
+      routeName: 'K58'
     };
 
     fetch(url, {
@@ -109,7 +109,7 @@
 
         if (!busStopName) {
           busStopName = busStop.busStopId
-          //continue; // Skip the bus stop group if the bus stop code doesn't have a mapping
+          continue; // Skip the bus stop group if the bus stop code doesn't have a mapping
         }
         
         html += '<h2 style="text-decoration: underline;font-size: 10vw;margin-bottom: 10px;">' + busStopName + ':</h2>';
