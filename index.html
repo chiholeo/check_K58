@@ -3,6 +3,7 @@
 <head>
   <meta http-equiv="refresh" content="30">
   <title>Bus Schedule</title>
+  <script src="constants.js"></script>
   <link rel="apple-touch-icon" href="bus_icon.png">
   <link rel="icon" href="bus_icon.png" type="image/x-icon">
   <style>
@@ -63,34 +64,7 @@
       throw new Error('Network response was not ok.');
     })
     .then(function(data) {
-      var busStopMap = {
-        'K58-U010':'富泰',
-        'K58-U020':'聚康山莊',
-        'K58-U023':'嶺南大學',
-        'K58-U026':'彩暉花園',
-        'K58-U030':'港鐵兆康站 (南), (輕鐵兆康站)',
-        'K58-U040':'兆康苑',
-        'K58-U050':'輕鐵麒麟站',
-        'K58-U070': '青松觀', // Hard-coded mapping
-        'K58-U060':'屯門醫院',
-        //'K58-U080':'保良局莊啟程第二小學',
-        //'K58-U090':'何壽基小學',
-        //'K58-U100':'良景&#37032;',
-        //'K58-U110':'輕鐵新圍站',
-        //'K58-U120':'輕鐵石排站',
-        //'K58-U130':'輕鐵鳴琴站',
-        //'K58-U140':'輕鐵建安站',
-        //'K58-U150':'港鐵屯門站',
-        //'K58-U160':'屯門市中心',
-        //'K58-U170':'屯門官立中學',
-        //'K58-U180':'恒順園',
-        //'K58-U190':'恒豐園',
-        //'K58-U200':'三聖&#37032;',
-        //'K58-U210':'青山灣',
-        // Add more mappings as needed
-      };
-      const single = ['910'];
-      const double = ['150','325','827','832','376','542'];
+
 
       var resultElement = document.getElementById('result');
       resultElement.innerHTML = '';
