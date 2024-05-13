@@ -25,4 +25,4 @@ const busStopMap = {
     // Add more mappings as needed
   };
   const single = ['910'];
-  const double = ['150','325','827','832','376','542'];
+  const double = ['150','325','827','832','376','542','327'];
